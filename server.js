@@ -32,12 +32,12 @@ app.get("/", (req, res) => {
   res.json({ hello: "Hello World!" });
 });
 
-app.get("/artists", async (req, res) => {
-  res.json(await Artists.find({}));
-});
+// app.get("/artists", async (req, res) => {
+//   res.json(await Artists.find({}));
+// });
 
 // aritst Route send to artist router
-app.use("/artists", artistsRouter);
+app.get("/artists", artistsRouter);
 app.use("/bands", bandsRouter);
 
 //LISTENER
