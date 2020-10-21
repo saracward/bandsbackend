@@ -24,4 +24,17 @@ router.put("/:id", async (req, res) => {
   );
 });
 
+router.put("/:artistsId/addBands/:BandsId", async (req, res) => {
+  console.log("author route from put method update bands: ", req.params);
+  const Bands = await Bands.findById(req.params.bandsId);
+  const Artists = await Artists.findByIdAndUpdate(req.params.artistsId, {
+    $push: { bands: bands.id },
+    new: true,
+  });
+  res.json({
+    status: 200,
+    data: artists,
+  });
+});
+
 module.exports = router;
