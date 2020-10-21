@@ -1,40 +1,26 @@
 require("dotenv").config();
-const { PORT = 4000, NODE_ENV = "development" } = process.env;
-
-//MONGO CONNECTION
-const mongoose = require("./DB/conn");
-
-//CORS
 const cors = require("cors");
-const corsOptions = require("./configs/cors.js");
-
-//Bringing in Express
+const corsOptions = require("./configs/cors");
+const morgan = require("morgan");
 const express = require("express");
 const app = express();
+const { PORT = 5000, NODE_ENV = "development" } = process.env;
+const mongoose = require("./DB/conn");
 
-//OTHER IMPORTS
-const morgan = require("morgan");
-const artistsRouter = require("./controllers/artists");
-const bandsRouter = require("./controllers/bands");
-////////////
-//MIDDLEWARE
-////////////
+// NODE_ENV === "production" ? app.use(cors(corsOptions)) : app.use(cors())
 app.use(cors());
 app.use(express.json());
-app.use(morgan("tiny")); //logging
+app.use(morgan("tiny"));
 
-///////////////
-//Routes and Routers
-//////////////
-
-//Route for testing server is working
 app.get("/", (req, res) => {
-  res.json({ hello: "Hello World!" });
+  res.json({ hello: "Hello World" });
 });
 
-// artist Route send to artist router
-app.use("/artists", artistsRouter);
-app.use("/bands", bandsRouter);
+const artistsRouter = require("./controllers/artists");
+app.use("/artists/", artistsRouter);
+
+const bandsRouter = require("./controllers/bands");
+app.use("/bands/", bandsRouter);
 
 //LISTENER
 app.listen(PORT, () => {
