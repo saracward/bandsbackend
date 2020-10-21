@@ -4,7 +4,7 @@ const router = Router();
 const seedData = require("../response.json");
 const Artists = require("../models/artists");
 
-router.post("/seed", async (req, res) => {
+router.get("/seed", async (req, res) => {
   res.json(await Bands.insertMany(seedData));
 });
 
@@ -42,5 +42,13 @@ router.put("/:bandsId/addArtists/:artistsId", async (req, res) => {
     data: bands,
   });
 });
+
+//router.post("/artists/:bandsid", async (req,res) => {
+//const artsts = await Artists.create(req.body)
+//const band = await Bands.findbyId{req.params.bandsId}
+//blog.comments.push(artists._id)
+//bands.save()
+//res.json(artists)
+//})
 
 module.exports = router;
