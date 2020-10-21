@@ -14,8 +14,8 @@ const app = express();
 
 //OTHER IMPORTS
 const morgan = require("morgan");
-const artistsRouter = require("./controllers/artists");
-const bandsRouter = require("./controllers/bands");
+const artistsRouter = require("./controllers/artists.js");
+const bandsRouter = require("./controllers/bands.js");
 ////////////
 //MIDDLEWARE
 ////////////
@@ -30,6 +30,10 @@ app.use(morgan("tiny")); //logging
 //Route for testing server is working
 app.get("/", (req, res) => {
   res.json({ hello: "Hello World!" });
+});
+
+app.get("/artists", async (req, res) => {
+  res.json(await Artists.find({}));
 });
 
 // aritst Route send to artist router
