@@ -1,3 +1,5 @@
 node_modules
 .DS_Store
 .env
+
+MONGODBURI=mongodb+srv://saraward:Sandshovel3@cluster0.4qwem.gcp.mongodb.net/bandsapi?retryWrites=true&w=majority

@@ -19,7 +19,7 @@ const bandsRouter = require("./controllers/bands");
 ////////////
 //MIDDLEWARE
 ////////////
-NODE_ENV === "production" ? app.use(cors(corsOptions)) : app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(morgan("tiny")); //logging
 
