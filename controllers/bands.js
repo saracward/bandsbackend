@@ -1,6 +1,12 @@
 const Bands = require("../models/bands");
 const { Router } = require("express");
 const router = Router();
+const seedData = require("../response.json");
+const Artists = require("../models/artists");
+
+router.post("/seed", async (req, res) => {
+  res.json(await Bands.insertMany(seedData));
+});
 
 //index route
 router.get("/", async (req, res) => {
@@ -24,16 +30,16 @@ router.put("/:id", async (req, res) => {
   );
 });
 
-router.put("/:artistsId/addBands/:BandsId", async (req, res) => {
+router.put("/:bandsId/addArtists/:artistsId", async (req, res) => {
   console.log("author route from put method update bands: ", req.params);
-  const Bands = await Bands.findById(req.params.bandsId);
-  const Artists = await Artists.findByIdAndUpdate(req.params.artistsId, {
-    $push: { bands: bands.id },
+  const artists = await Artists.findById(req.params.artistsId);
+  const bands = await Bands.findByIdAndUpdate(req.params.bandsId, {
+    $push: { artists: artists.id },
     new: true,
   });
   res.json({
     status: 200,
-    data: artists,
+    data: bands,
   });
 });
 

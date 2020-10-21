@@ -6,6 +6,7 @@ const bandsSchema = new Schema(
     name: String,
     genre: String,
     img: String,
+    artists: [{ ref: "Artists", type: Schema.Types.ObjectId }],
   },
   { timestamps: true }
 );
