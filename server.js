@@ -14,8 +14,8 @@ const app = express();
 
 //OTHER IMPORTS
 const morgan = require("morgan");
-const artistsRouter = require("./controllers/artists.js");
-const bandsRouter = require("./controllers/bands.js");
+const artistsRouter = require("./controllers/artists");
+const bandsRouter = require("./controllers/bands");
 ////////////
 //MIDDLEWARE
 ////////////
@@ -32,11 +32,7 @@ app.get("/", (req, res) => {
   res.json({ hello: "Hello World!" });
 });
 
-app.get("/artists", async (req, res) => {
-  res.json(await Artists.find({}));
-});
-
-// aritst Route send to artist router
+// artist Route send to artist router
 app.use("/artists", artistsRouter);
 app.use("/bands", bandsRouter);
 
